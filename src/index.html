@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="UTF-8">
+    <title>VSTS Workitem Printer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="./pat.js" defer></script>
+    <script src="./url-parser.js" defer></script>
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <div id="input-area" class="margin-top-20vh">
+      <h1 class="text-center">VSTS Workitem Printer</h1>
+      <h5 class="text-center">Informe o link de edição do seu card</h5>
+      <div class="flex flex-justify-center">
+        <input 
+          id="url-input"
+          placeholder="Ex.: https://db1global.visualstudio.com/Equipe%20interna/_workitems/edit/1336038"
+        />
+        <button
+          class="search-btn"
+          onclick="searchAndDisplayWorkitem()"
+        >
+          Buscar
+        </button>
+      </div>
+    </div>
+    <div id="workitem-area" class="hide">
+      <h2>
+        <a id="workitem-url" target="_blank"> <span id="work-item-type"></span><span id="work-item-id"></span></a>:
+        <span id="work-item-title"></span>
+      </h2>
+      <h4>Problema</h4>
+      <div id="work-item-problem"></div>
+      <h4>Descrição</h4>
+      <div id="work-item-description"></div>
+      <h4>Critérios de Aceitação</h4>
+      <div id="work-item-accepptance-criteria"></div>
+    </div>
+  </body>
+</html>
