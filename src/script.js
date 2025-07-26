@@ -2,14 +2,18 @@ const searchAndDisplayWorkitem = async() => {
 
   const transformWorkItem = (workItem) => {
     const fields = workItem.fields;
+
+    const problem = replaceImgTags(fields['Custom.Problem'] || fields['System.Reason']);
+    const description = replaceImgTags(fields['System.Description']);
+    const acceptance = replaceImgTags(fields['Microsoft.VSTS.Common.AcceptanceCriteria']);
     
     return {
       id: fields['System.Id'],
       title: fields['System.Title'] || 'No Title',
       workItemType: fields['System.WorkItemType'] || 'Unknown',
-      description: fields['System.Description'],
-      acceptanceCriteria: fields['Microsoft.VSTS.Common.AcceptanceCriteria'],
-      problem: fields['Custom.Problem'] || fields['System.Reason'],
+      description: description,
+      acceptanceCriteria: acceptance,
+      problem: problem,
     };
   };
 
@@ -26,7 +30,19 @@ const searchAndDisplayWorkitem = async() => {
     document.title = `Requisito_${workItem.id}`;
   };
 
-  const vstsEditLink = 'https://db1global.visualstudio.com/Equipe%20interna/_workitems/edit/1336038';
+  const replaceImgTags = (html) => {
+    const container = document.createElement('div');
+    container.innerHTML = html;
+
+    container.querySelectorAll('img').forEach(img => {
+      const texto = document.createTextNode('(Imagem consta no VSTS)');
+      img.parentNode.replaceChild(texto, img);
+    });
+
+    return container.innerHTML;
+  }
+
+  const vstsEditLink = document.getElementById('url-input').value;
   const auth = btoa(':' + PERSONAL_ACCESS_TOKEN);
   this.headers = new Headers({
     'Authorization': `Basic ${auth}`,
