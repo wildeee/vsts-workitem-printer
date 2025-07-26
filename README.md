@@ -7,6 +7,7 @@ You must generate a Personal Access Token on VSTS (Azure Dev-ops) with the "Work
 Paste your PAT token on pat.js file, replacing the string 'PASTE_YOUR_PAT_TOKEN_HERE'
 
 If you're running the project locally, just open src/index.html on your browser.
+
 Or build the Dockerfile and run the image.
 
 # WARNING
