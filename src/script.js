@@ -21,8 +21,8 @@ const searchAndDisplayWorkitem = async() => {
     document.getElementById('work-item-problem').innerHTML = workItem.problem;
     document.getElementById('work-item-description').innerHTML = workItem.description;
     document.getElementById('work-item-accepptance-criteria').innerHTML = workItem.acceptanceCriteria;
-    document.getElementById('workitem-area').className = '';
-    document.getElementById('input-area').className = '';
+    document.getElementById('workitem-area').classList.remove('hide');
+    document.getElementById('input-area').classList.remove('margin-top-20vh');
     document.title = `Requisito_${workItem.id}`;
   };
 
@@ -55,6 +55,7 @@ const searchAndDisplayWorkitem = async() => {
 };
 
 window.onload = () => {
+  document.getElementById('search-btn').addEventListener('click', searchAndDisplayWorkitem);
   document.getElementById('url-input').addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
       searchAndDisplayWorkitem();
